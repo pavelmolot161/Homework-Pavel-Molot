@@ -5,6 +5,9 @@ class User:
         self.password = password           ### - в хэшированном виде, число
         self.age = age                     ### - возраст, число
 
+    def __str__(self):
+        return self.nickname
+
     def change_password(self, new_password):
         # здесь должен быть код для хэширования нового пароля и сохранения его в атрибуте password
         self.password = hash(new_password)
@@ -33,7 +36,7 @@ class UrTube:
         for user in self.users:
             if user.nickname == nickname:
                 print(f"Пользователь {nickname} уже существует.")
-                # return
+                return
         new_user = User(nickname, hash(password), age)
         self.users.append(new_user)
         self.current_user = new_user
@@ -48,7 +51,7 @@ class UrTube:
     def get_videos(self, search_word):
         result = [video.title for video in self.videos if search_word.lower() in video.title.lower()]
         return result
-#
+
     def watch_video(self, video_title):
         if not self.current_user:
             print("Войдите в аккаунт, чтобы смотреть видео")
