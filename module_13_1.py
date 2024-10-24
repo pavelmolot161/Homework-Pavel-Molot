@@ -6,7 +6,12 @@ import asyncio
 async def start_strongman(name, power):
     print(f'Силач {name} начал соревнования.')
     for number_bol in range(1, 6):
-        await asyncio.sleep(power)
+
+### - добавленна обратная пропорция - "тот кто сильнее поднимает шар быстрее" _______
+
+        delay = 5 / power
+        await asyncio.sleep(delay)
+###__________________________________________________________________________________
         print(f'Силач {name} поднял {number_bol}-й шар.')
     print(f'Силач {name} закончил соревнования.')
 
