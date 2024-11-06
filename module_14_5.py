@@ -144,7 +144,7 @@ async def send_confirm_message1(Callback_query: types.CallbackQuery, connection=
         description = result[1]                         ### - заново присваеваем переменным индексы
         price = result[2]                               ### - заново присваеваем переменным индексы
         await Callback_query.message.answer(F"Вы успешно приобрели {title},  для улучшения тренировок !")
-        with open(f'picther.14_3/{product_id}.jpg', 'rb') as img:
+        with open(f'{product_id}.jpg', 'rb') as img:
             await Callback_query.message.answer_photo(img,
                                         f" Название: {title} | Описание: {description} | Цена: {price} р. ")
     await Callback_query.answer()
