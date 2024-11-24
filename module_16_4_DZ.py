@@ -30,7 +30,19 @@ def create_user(username: Annotated[str, Path(min_length=5, max_length=20, descr
                                               example='UrbanUser')],
                 age: int = Path(ge=18, le=120, description="Enter age", example='24')) -> str:
     try:
-        user_id = len(users_dict) + 1                                      ### - Присваиваем уникальный id
+
+##########_________________ИЗМЕНЕНИЯ __________________________________________
+
+        if users_dict:                            ### - проверка содержит ли словарь какие либо элементы
+            user_id = max(users_dict.keys()) + 1  ### - Если словарь не пуст, мы используем функцию max(), чтобы найти
+                                                   ## максимальный ключ к которому добавляем 1, чтобы
+                                                    # получить новый уникальный идентификатор (user_id)
+                                                    # для следующего пользователя.
+        else:
+            user_id = 1                           ### - если словарь пуст то id = 1
+
+##########_____________________________________________________________________
+
         user = User(id=user_id, username=username, age=age)
         users_dict[user_id] = user                                         ### - Добавляем пользователя в словарь
         return f"User {user} is registered (<01>)"
